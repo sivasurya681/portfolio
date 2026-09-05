@@ -504,6 +504,10 @@
     transform: translateY(-1px);
   }
 
+  .hero-identity-row {
+    display: contents;
+  }
+
   /* ============================================================
      PORTRAIT ASYMMETRIC FRAME & STRICT HEADROOM (CRITICAL)
      ============================================================ */
@@ -610,14 +614,28 @@
   @media (max-width: 992px) {
     .hero-grid {
       grid-template-columns: 1fr;
-      gap: 44px;
+      gap: 36px;
+    }
+    .hero-identity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .hero-display-identity {
+      margin-bottom: 0;
+      flex: 1;
     }
     .hero-right-wrap {
       margin-top: 0;
+      width: auto;
+      flex-shrink: 0;
     }
     .hero-portrait-frame {
-      max-width: 270px;
+      max-width: clamp(140px, 32vw, 190px);
       aspect-ratio: 0.85 / 1;
+      padding-top: 18px;
     }
   }
 
@@ -625,15 +643,18 @@
     .hero {
       padding-top: 100px;
     }
+    .hero-identity-row {
+      gap: 12px;
+    }
     .hero-name-h1 {
-      font-size: clamp(38px, 11vw, 52px);
+      font-size: clamp(30px, 8.5vw, 42px);
     }
     .role-title-text {
-      font-size: 16px;
+      font-size: 15px;
     }
     .hero-portrait-frame {
-      max-width: 220px;
-      padding-top: 28px;
+      max-width: clamp(125px, 36vw, 155px);
+      padding-top: 16px;
     }
   }
 
@@ -1232,11 +1253,22 @@
           </span>
         </div>
 
-        <!-- Display Name Identity -->
-        <div class="hero-display-identity">
-          <h1 class="hero-name-h1">
-            SIVA <span class="name-surya">SURYA</span>
-          </h1>
+        <!-- Display Name & Photo Identity Row -->
+        <div class="hero-identity-row">
+          <div class="hero-display-identity">
+            <h1 class="hero-name-h1">
+              SIVA <span class="name-surya">SURYA</span>
+            </h1>
+          </div>
+
+          <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
+          <div class="hero-right-wrap">
+            <div class="hero-portrait-frame tilt" data-tilt-max="3">
+              <div class="hero-portrait-aura" aria-hidden="true"></div>
+              <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
+              <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
+            </div>
+          </div>
         </div>
 
         <!-- Primary Role Banner ("HERO TITLE") -->
@@ -1283,14 +1315,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
-      <div class="hero-right-wrap">
-        <div class="hero-portrait-frame tilt" data-tilt-max="3">
-          <div class="hero-portrait-aura" aria-hidden="true"></div>
-          <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
-          <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
-        </div>
-      </div>
+
     </div>
   </section>
 
