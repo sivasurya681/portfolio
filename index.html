@@ -315,7 +315,7 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 52px;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     z-index: 2;
     width: 100%;
@@ -504,10 +504,6 @@
     transform: translateY(-1px);
   }
 
-  .hero-mobile-portrait {
-    display: none;
-  }
-
   /* ============================================================
      PORTRAIT ASYMMETRIC FRAME & STRICT HEADROOM (CRITICAL)
      ============================================================ */
@@ -519,6 +515,7 @@
     z-index: 2;
     width: 100%;
     align-items: center;
+    margin-top: 54px;
     opacity: 0;
     animation: heroPortraitReveal 800ms var(--ease-out) 400ms forwards;
   }
@@ -610,29 +607,17 @@
   }
 
   /* Responsive Adjustments */
-  @media (max-width: 860px) {
+  @media (max-width: 992px) {
     .hero-grid {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 44px;
     }
     .hero-right-wrap {
-      display: none !important;
+      margin-top: 0;
     }
-    .hero-display-identity {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .hero-mobile-portrait {
-      display: block;
-      flex-shrink: 0;
-    }
-    .hero-mobile-portrait .hero-portrait-frame {
-      max-width: clamp(130px, 32vw, 170px);
+    .hero-portrait-frame {
+      max-width: 270px;
       aspect-ratio: 0.85 / 1;
-      padding-top: 18px;
     }
   }
 
@@ -640,18 +625,15 @@
     .hero {
       padding-top: 100px;
     }
-    .hero-display-identity {
-      gap: 12px;
-    }
     .hero-name-h1 {
-      font-size: clamp(28px, 8.2vw, 40px);
+      font-size: clamp(38px, 11vw, 52px);
     }
     .role-title-text {
-      font-size: 15px;
+      font-size: 16px;
     }
-    .hero-mobile-portrait .hero-portrait-frame {
-      max-width: clamp(115px, 34vw, 145px);
-      padding-top: 14px;
+    .hero-portrait-frame {
+      max-width: 220px;
+      padding-top: 28px;
     }
   }
 
@@ -1255,12 +1237,6 @@
           <h1 class="hero-name-h1">
             SIVA <span class="name-surya">SURYA</span>
           </h1>
-          <div class="hero-mobile-portrait">
-            <div class="hero-portrait-frame">
-              <div class="hero-portrait-aura" aria-hidden="true"></div>
-              <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
-            </div>
-          </div>
         </div>
 
         <!-- Primary Role Banner ("HERO TITLE") -->
