@@ -612,33 +612,71 @@
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .hero-identity-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 14px;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
+    }
+    .hero-left-content {
+      display: contents;
+    }
+    .hero-status-row {
+      grid-column: 1 / -1;
+      order: 1;
+      margin-bottom: 2px;
     }
     .hero-display-identity {
+      grid-column: 1;
+      order: 2;
+      align-self: center;
       margin-bottom: 0;
-      flex: 1;
     }
     .hero-name-h1 {
-      font-size: clamp(30px, 8.2vw, 44px);
+      font-size: clamp(28px, 7.5vw, 42px);
       line-height: 1.0;
     }
     .hero-right-wrap {
+      grid-column: 2;
+      order: 2;
       margin-top: 0;
       width: auto;
-      flex-shrink: 0;
+      align-self: center;
+      justify-self: end;
+      opacity: 1;
+      animation: none;
     }
     .hero-portrait-frame {
-      max-width: clamp(130px, 32vw, 175px);
-      aspect-ratio: 0.85 / 1;
-      padding-top: 16px;
+      width: clamp(100px, 26vw, 140px);
+      max-width: 140px;
+      aspect-ratio: 0.82 / 1;
+      border-radius: 14px;
+      padding-top: 10px;
+    }
+    .hero-portrait-img-el {
+      width: 88%;
+      max-height: 86%;
+    }
+    .hero-role-banner {
+      grid-column: 1 / -1;
+      order: 3;
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+    .hero-spec-stack {
+      grid-column: 1 / -1;
+      order: 4;
+    }
+    .hero p.lede {
+      grid-column: 1 / -1;
+      order: 5;
+    }
+    .hero-actions {
+      grid-column: 1 / -1;
+      order: 6;
+    }
+    .hero-links {
+      grid-column: 1 / -1;
+      order: 7;
     }
 
     /* Single Line Contact Cards for Mobile (Full Text, NO Ellipsis, NO Clipping) */
@@ -694,15 +732,13 @@
     .hero {
       padding-top: 90px;
     }
-    .hero-identity-row {
-      gap: 10px;
-    }
     .hero-name-h1 {
-      font-size: clamp(25px, 8vw, 32px);
+      font-size: clamp(24px, 7.5vw, 30px);
     }
     .hero-portrait-frame {
-      max-width: clamp(105px, 30vw, 130px);
-      padding-top: 12px;
+      width: clamp(85px, 24vw, 110px);
+      max-width: 110px;
+      padding-top: 8px;
     }
     #contact .container {
       padding-left: 10px;
@@ -1321,22 +1357,11 @@
           </span>
         </div>
 
-        <!-- Display Name & Photo Identity Row -->
-        <div class="hero-identity-row">
-          <div class="hero-display-identity">
-            <h1 class="hero-name-h1">
-              SIVA <span class="name-surya">SURYA</span>
-            </h1>
-          </div>
-
-          <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
-          <div class="hero-right-wrap">
-            <div class="hero-portrait-frame tilt" data-tilt-max="3">
-              <div class="hero-portrait-aura" aria-hidden="true"></div>
-              <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
-              <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
-            </div>
-          </div>
+        <!-- Display Name Identity -->
+        <div class="hero-display-identity">
+          <h1 class="hero-name-h1">
+            SIVA <span class="name-surya">SURYA</span>
+          </h1>
         </div>
 
         <!-- Primary Role Banner ("HERO TITLE") -->
@@ -1379,11 +1404,17 @@
           <a href="mailto:sivasurya06082001@gmail.com" aria-label="Send Email">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Email
-          </a>
         </div>
       </div>
 
-
+      <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
+      <div class="hero-right-wrap">
+        <div class="hero-portrait-frame tilt" data-tilt-max="3">
+          <div class="hero-portrait-aura" aria-hidden="true"></div>
+          <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
+          <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
+        </div>
+      </div>
     </div>
   </section>
 
