@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E131F" />
+      <stop offset="100%" stop-color="#06090E" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5D28E" />
+      <stop offset="50%" stop-color="#C99A4B" />
+      <stop offset="100%" stop-color="#996E2E" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9BBDF0" />
+      <stop offset="100%" stop-color="#6FA0D6" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(201,154,75,0.7)" />
+      <stop offset="50%" stop-color="rgba(111,160,214,0.4)" />
+      <stop offset="100%" stop-color="rgba(201,154,75,0.2)" />
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(201,154,75,0.25)" />
+      <stop offset="100%" stop-color="rgba(201,154,75,0)" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
+  
+  <!-- Ambient Soft Core Glow -->
+  <circle cx="256" cy="256" r="210" fill="url(#glowGrad)" />
+
+  <!-- Subtle Geometric Frame -->
+  <rect x="20" y="20" width="472" height="472" rx="90" fill="none" stroke="url(#borderGrad)" stroke-width="8" />
+
+  <!-- Integrated Monogram 'S S' -->
+  <!-- Left 'S' -->
+  <path d="M 225 160 
+           L 155 160 
+           A 36 36 0 0 0 119 196 
+           L 119 220 
+           A 36 36 0 0 0 155 256 
+           L 195 256 
+           A 36 36 0 0 1 231 292 
+           L 231 316 
+           A 36 36 0 0 1 195 352 
+           L 125 352" 
+        fill="none" stroke="url(#goldGrad)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right 'S' -->
+  <path d="M 387 160 
+           L 317 160 
+           A 36 36 0 0 0 281 196 
+           L 281 220 
+           A 36 36 0 0 0 317 256 
+           L 357 256 
+           A 36 36 0 0 1 393 292 
+           L 393 316 
+           A 36 36 0 0 1 357 352 
+           L 287 352" 
+        fill="none" stroke="url(#goldGrad)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Tech Accent Nodes -->
+  <circle cx="225" cy="160" r="11" fill="#F5D28E" />
+  <circle cx="125" cy="352" r="11" fill="#F5D28E" />
+  <circle cx="387" cy="160" r="11" fill="#9BBDF0" />
+  <circle cx="287" cy="352" r="11" fill="#9BBDF0" />
+
+  <!-- Interconnection Data Dot -->
+  <circle cx="256" cy="256" r="8" fill="#C99A4B" opacity="0.8" />
+</svg>
