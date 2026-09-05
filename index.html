@@ -519,7 +519,7 @@
     z-index: 2;
     width: 100%;
     align-items: center;
-    margin-top: 54px;
+    margin-top: 0;
     opacity: 0;
     animation: heroPortraitReveal 800ms var(--ease-out) 400ms forwards;
   }
@@ -1322,22 +1322,11 @@
           </span>
         </div>
 
-        <!-- Display Name & Photo Identity Row -->
-        <div class="hero-identity-row">
-          <div class="hero-display-identity">
-            <h1 class="hero-name-h1">
-              SIVA <span class="name-surya">SURYA</span>
-            </h1>
-          </div>
-
-          <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
-          <div class="hero-right-wrap">
-            <div class="hero-portrait-frame tilt" data-tilt-max="3">
-              <div class="hero-portrait-aura" aria-hidden="true"></div>
-              <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
-              <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
-            </div>
-          </div>
+        <!-- Display Name Identity -->
+        <div class="hero-display-identity">
+          <h1 class="hero-name-h1">
+            SIVA <span class="name-surya">SURYA</span>
+          </h1>
         </div>
 
         <!-- Primary Role Banner ("HERO TITLE") -->
@@ -1381,6 +1370,15 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Email
           </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
+      <div class="hero-right-wrap">
+        <div class="hero-portrait-frame tilt" data-tilt-max="3">
+          <div class="hero-portrait-aura" aria-hidden="true"></div>
+          <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
+          <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
         </div>
       </div>
 

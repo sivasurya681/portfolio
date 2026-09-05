@@ -7,10 +7,13 @@
     "dev": "serve . -l 3000",
     "start": "serve . -l 3000",
     "build": "echo 'Static production assets ready in root directory.'",
-    "serve": "serve . -l 3000"
+    "serve": "serve . -l 3000",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "devDependencies": {
-    "serve": "^14.2.4"
+    "serve": "^14.2.4",
+    "wrangler": "^4.129.0"
   },
   "keywords": [
     "ai-ml-engineer",
