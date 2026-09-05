@@ -1266,16 +1266,29 @@
   .resume-facts{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
 
   /* ===================== CONTACT & FOOTER ===================== */
+  #contact .container {
+    display: block !important;
+    width: 100% !important;
+    max-width: var(--max) !important;
+    margin: 0 auto !important;
+  }
+  #contact .section-head {
+    display: block !important;
+    width: 100% !important;
+    max-width: 620px !important;
+    margin-bottom: 40px !important;
+  }
   .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    clear: both !important;
   }
   @media (max-width: 768px) {
     .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
     }
   }
 
