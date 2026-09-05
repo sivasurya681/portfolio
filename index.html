@@ -86,8 +86,6 @@
   }
 
   *{box-sizing:border-box;}
-  *, *::before, *::after { text-decoration: none !important; }
-  a, a:hover, a:focus, a:active, a:visited { text-decoration: none !important; border-bottom: none !important; }
   html{scroll-behavior:smooth;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -175,7 +173,7 @@
   .container{ max-width:var(--max); margin:0 auto; padding:0 24px; position:relative; z-index:2; }
   
   /* Section-Level Mouse Spotlight Overlay */
-  section{ padding:96px 0; border-bottom:none; position:relative; overflow:hidden; }
+  section{ padding:96px 0; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
   @media (max-width:640px){ section{ padding:60px 0; } }
 
   section::before {
@@ -200,7 +198,7 @@
     font-family:var(--mono); font-size:13px; color:var(--accent);
     display:flex; align-items:center; gap:8px; margin-bottom:14px;
   }
-  .eyebrow::before{ display: none !important; }
+  .eyebrow::before{ content:''; width:16px; height:1px; background:var(--accent); display:inline-block; }
 
   .section-head{ max-width:620px; margin-bottom:48px; }
   .section-head h2{ font-size:clamp(28px,3.4vw,38px); margin-bottom:12px; }
@@ -251,8 +249,13 @@
     position:relative; text-decoration:none; color:var(--text-muted); font-size:14px; padding:4px 0;
     transition:color var(--dur-fast);
   }
+  nav.primary-links a::after{
+    content:''; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:var(--accent);
+    transition:width var(--dur-med) var(--ease-out);
+  }
   nav.primary-links a:hover{ color:var(--text); }
   nav.primary-links a.active{ color:var(--accent); }
+  nav.primary-links a.active::after{ width:100%; }
 
   .nav-cta{ display:flex; align-items:center; gap:14px; }
   .btn{
@@ -287,13 +290,13 @@
     .nav-toggle{ display:inline-flex; }
   }
 
-  .mobile-menu{ display:none; flex-direction:column; gap:2px; padding:8px 24px 20px; border-bottom:none; background:var(--bg); }
+  .mobile-menu{ display:none; flex-direction:column; gap:2px; padding:8px 24px 20px; border-bottom:1px solid var(--line); background:var(--bg); }
   .mobile-menu.open{ display:flex; }
-  .mobile-menu a{ text-decoration:none; color:var(--text-muted); padding:12px 4px; border-bottom:none; font-size:15px; }
+  .mobile-menu a{ text-decoration:none; color:var(--text-muted); padding:12px 4px; border-bottom:1px solid var(--line); font-size:15px; }
   .mobile-menu a:last-child{ border-bottom:none; }
 
   /* ===================== HERO ===================== */
-  .hero{ padding:172px 0 100px; border-bottom:none; position:relative; overflow:hidden; }
+  .hero{ padding:172px 0 100px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
   #network-canvas{ position:absolute; inset:0; z-index:0; opacity:0.55; pointer-events:none; }
   
   /* ============================================================
@@ -491,11 +494,13 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: color var(--dur-fast), transform var(--dur-fast);
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
   }
 
   .hero-links a:hover {
     color: var(--accent);
+    border-color: var(--accent-line);
     transform: translateY(-1px);
   }
 
@@ -514,6 +519,7 @@
     z-index: 2;
     width: 100%;
     align-items: center;
+    margin-top: 54px;
     opacity: 0;
     animation: heroPortraitReveal 800ms var(--ease-out) 400ms forwards;
   }
@@ -607,71 +613,33 @@
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px 14px;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .hero-identity-row {
+      display: flex;
       align-items: center;
-    }
-    .hero-left-content {
-      display: contents;
-    }
-    .hero-status-row {
-      grid-column: 1 / -1;
-      order: 1;
-      margin-bottom: 2px;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
     }
     .hero-display-identity {
-      grid-column: 1;
-      order: 2;
-      align-self: center;
       margin-bottom: 0;
+      flex: 1;
     }
     .hero-name-h1 {
-      font-size: clamp(28px, 7.5vw, 42px);
+      font-size: clamp(30px, 8.2vw, 44px);
       line-height: 1.0;
     }
     .hero-right-wrap {
-      grid-column: 2;
-      order: 2;
       margin-top: 0;
       width: auto;
-      align-self: center;
-      justify-self: end;
-      opacity: 1;
-      animation: none;
+      flex-shrink: 0;
     }
     .hero-portrait-frame {
-      width: clamp(100px, 26vw, 140px);
-      max-width: 140px;
-      aspect-ratio: 0.82 / 1;
-      border-radius: 14px;
-      padding-top: 10px;
-    }
-    .hero-portrait-img-el {
-      width: 88%;
-      max-height: 86%;
-    }
-    .hero-role-banner {
-      grid-column: 1 / -1;
-      order: 3;
-      margin-top: 6px;
-      margin-bottom: 14px;
-    }
-    .hero-spec-stack {
-      grid-column: 1 / -1;
-      order: 4;
-    }
-    .hero p.lede {
-      grid-column: 1 / -1;
-      order: 5;
-    }
-    .hero-actions {
-      grid-column: 1 / -1;
-      order: 6;
-    }
-    .hero-links {
-      grid-column: 1 / -1;
-      order: 7;
+      max-width: clamp(130px, 32vw, 175px);
+      aspect-ratio: 0.85 / 1;
+      padding-top: 16px;
     }
 
     /* Single Line Contact Cards for Mobile (Full Text, NO Ellipsis, NO Clipping) */
@@ -727,13 +695,15 @@
     .hero {
       padding-top: 90px;
     }
+    .hero-identity-row {
+      gap: 10px;
+    }
     .hero-name-h1 {
-      font-size: clamp(24px, 7.5vw, 30px);
+      font-size: clamp(25px, 8vw, 32px);
     }
     .hero-portrait-frame {
-      width: clamp(85px, 24vw, 110px);
-      max-width: 110px;
-      padding-top: 8px;
+      max-width: clamp(105px, 30vw, 130px);
+      padding-top: 12px;
     }
     #contact .container {
       padding-left: 10px;
@@ -793,7 +763,7 @@
     opacity:0; transition:opacity var(--dur-med); z-index:1;
   }
   .terminal:hover::before{ opacity:1; }
-  .terminal-head{ display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:none; flex-wrap:nowrap; overflow:hidden; }
+  .terminal-head{ display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); flex-wrap:nowrap; overflow:hidden; }
   .terminal-head span.dot-icon{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
   
   .terminal-head .label{
@@ -832,7 +802,7 @@
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
     padding:32px 28px; height:100%; display:flex; flex-direction:column; justify-content:space-between;
   }
-  .fact-row{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 0; border-bottom:none; font-size:14.5px; }
+  .fact-row{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; }
   .fact-row:last-child{ border-bottom:none; padding-bottom:0; }
   .fact-row:first-child{ padding-top:0; }
   .fact-row .k{ color:var(--text-faint); font-family:var(--mono); font-size:13px; }
@@ -1266,46 +1236,8 @@
   .resume-facts{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
 
   /* ===================== CONTACT & FOOTER ===================== */
-  #contact .container {
-    display: block !important;
-    width: 100% !important;
-    max-width: var(--max) !important;
-    margin: 0 auto !important;
-  }
-  #contact .section-head {
-    display: block !important;
-    width: 100% !important;
-    max-width: 620px !important;
-    margin-bottom: 40px !important;
-  }
-  .contact-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 20px !important;
-    width: 100% !important;
-    clear: both !important;
-  }
-
-  /* Explicit 2x2 Desktop Grid Placement */
-  .contact-card:nth-child(1) { grid-column: 1 !important; grid-row: 1 !important; }
-  .contact-card:nth-child(2) { grid-column: 2 !important; grid-row: 1 !important; }
-  .contact-card:nth-child(3) { grid-column: 1 !important; grid-row: 2 !important; }
-  .contact-card:nth-child(4) { grid-column: 2 !important; grid-row: 2 !important; }
-
-  @media (max-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr !important;
-      gap: 12px !important;
-    }
-    .contact-card:nth-child(1),
-    .contact-card:nth-child(2),
-    .contact-card:nth-child(3),
-    .contact-card:nth-child(4) {
-      grid-column: auto !important;
-      grid-row: auto !important;
-    }
-  }
-
+  .contact-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+  @media (max-width:768px){ .contact-grid{ grid-template-columns:1fr; } }
   .contact-card{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
     padding:20px 24px; text-decoration:none; display:flex; align-items:center; gap:20px;
@@ -1390,11 +1322,22 @@
           </span>
         </div>
 
-        <!-- Display Name Identity -->
-        <div class="hero-display-identity">
-          <h1 class="hero-name-h1">
-            SIVA <span class="name-surya">SURYA</span>
-          </h1>
+        <!-- Display Name & Photo Identity Row -->
+        <div class="hero-identity-row">
+          <div class="hero-display-identity">
+            <h1 class="hero-name-h1">
+              SIVA <span class="name-surya">SURYA</span>
+            </h1>
+          </div>
+
+          <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
+          <div class="hero-right-wrap">
+            <div class="hero-portrait-frame tilt" data-tilt-max="3">
+              <div class="hero-portrait-aura" aria-hidden="true"></div>
+              <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
+              <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
+            </div>
+          </div>
         </div>
 
         <!-- Primary Role Banner ("HERO TITLE") -->
@@ -1437,17 +1380,11 @@
           <a href="mailto:sivasurya06082001@gmail.com" aria-label="Send Email">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Email
+          </a>
         </div>
       </div>
 
-      <!-- Right Column: Asymmetric Editorial Frame & Headroom Controlled Portrait -->
-      <div class="hero-right-wrap">
-        <div class="hero-portrait-frame tilt" data-tilt-max="3">
-          <div class="hero-portrait-aura" aria-hidden="true"></div>
-          <!-- Explicit transparent portrait element with top headroom space (Clean visual, no text overlay) -->
-          <img src="assets/siva-surya-portrait.png" alt="Siva Surya — AI/ML Engineer" class="hero-portrait-img-el" loading="eager" decoding="async">
-        </div>
-      </div>
+
     </div>
   </section>
 
@@ -1844,8 +1781,8 @@
 
   <!-- CONTACT & FOOTER -->
   <section id="contact" style="border-bottom:none;">
-    <div class="container" style="display:block !important; width:100% !important;">
-      <div class="section-head" style="display:block !important; width:100% !important; max-width:620px !important; margin-bottom:40px !important;">
+    <div class="container">
+      <div class="section-head">
         <div class="eyebrow">Contact</div>
         <h2>Let's talk</h2>
         <p>Open to AI/ML, GenAI, and full-stack roles in India and the UAE — reach out directly.</p>
