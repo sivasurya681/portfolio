@@ -803,15 +803,95 @@
   .pipeline .node:hover{ border-color:var(--accent-line); transform:translateX(4px); box-shadow:0 4px 12px -4px rgba(var(--accent-rgb),0.2); }
   .pipeline .connector{ height:16px; width:1px; background:var(--line); margin-left:12px; }
 
-  /* ===================== TILT CARDS & LIGHTING EFFECT ===================== */
-  .tilt{ transform-style:preserve-3d; will-change:transform; transition:transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast), box-shadow var(--dur-med) var(--ease-out); position:relative; }
-  .tilt::before{
-    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0;
-    background:radial-gradient(340px circle at var(--gx,50%) var(--gy,50%), rgba(var(--accent-rgb),0.14), transparent 70%);
-    transition:opacity var(--dur-med) var(--ease-out); z-index:1;
+  /* ===================== GLOBAL CARD & HOVER SYSTEM ===================== */
+  .tilt,
+  .fact-panel,
+  .tl-card,
+  .featured-project,
+  .project-card,
+  .skill-cat,
+  .cert-card,
+  .resume-card,
+  .contact-card {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    transition: transform var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-med) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
+    will-change: transform;
+    transform-style: preserve-3d;
   }
-  .tilt:hover::before{ opacity:1; }
-  .tilt:hover{ border-color:rgba(201,154,75,0.45); box-shadow:0 24px 50px -20px rgba(0,0,0,0.7), 0 0 20px -5px rgba(var(--accent-rgb),0.15); }
+
+  .tilt::before,
+  .fact-panel::before,
+  .tl-card::before,
+  .featured-project::before,
+  .project-card::before,
+  .skill-cat::before,
+  .cert-card::before,
+  .resume-card::before,
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(340px circle at var(--gx, 50%) var(--gy, 50%), rgba(var(--accent-rgb), 0.14), transparent 70%);
+    transition: opacity var(--dur-med) var(--ease-out);
+    z-index: 1;
+  }
+
+  /* Universal Hover State for Desktop / Fine Pointer Devices */
+  @media (hover: hover) and (pointer: fine) {
+    .tilt:hover,
+    .fact-panel:hover,
+    .tl-card:hover,
+    .tl-item:hover .tl-card,
+    .featured-project:hover,
+    .project-card:hover,
+    .skill-cat:hover,
+    .cert-card:hover,
+    .resume-card:hover,
+    .contact-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(var(--accent-rgb), 0.45);
+      box-shadow: 0 18px 42px -16px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(var(--accent-rgb), 0.15);
+    }
+
+    .tilt:hover::before,
+    .fact-panel:hover::before,
+    .tl-card:hover::before,
+    .featured-project:hover::before,
+    .project-card:hover::before,
+    .skill-cat:hover::before,
+    .cert-card:hover::before,
+    .resume-card:hover::before,
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+  }
+
+  /* Keyboard Focus-Visible State for Accessibility */
+  .tilt:focus-visible,
+  .fact-panel:focus-visible,
+  .tl-card:focus-visible,
+  .featured-project:focus-visible,
+  .project-card:focus-visible,
+  .skill-cat:focus-visible,
+  .cert-card:focus-visible,
+  .resume-card:focus-visible,
+  .contact-card:focus-visible,
+  .btn:focus-visible,
+  .case-toggle:focus-visible,
+  .chip:focus-visible {
+    outline: 2px solid var(--accent) !important;
+    outline-offset: 3px !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.25), 0 12px 28px -12px rgba(0, 0, 0, 0.5) !important;
+  }
 
   /* ===================== ABOUT ===================== */
   .about-grid{ display:grid; grid-template-columns:1.35fr 1fr; gap:56px; align-items:stretch; }
@@ -898,18 +978,23 @@
   .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
   @media (max-width:860px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:560px){ .skills-grid{ grid-template-columns:1fr; } }
-  .skill-cat{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; transition:all var(--dur-med) var(--ease-out); }
-  .skill-cat:hover{ border-color:var(--accent-line); box-shadow:0 12px 28px -14px rgba(0,0,0,0.5); }
+  .skill-cat{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; cursor:default; }
   .skill-cat h4{ font-size:13px; font-family:var(--mono); color:var(--accent); margin-bottom:14px; }
   .chip-row{ display:flex; flex-wrap:wrap; gap:7px; }
   .chip{
     font-size:13px; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--line);
-    border-radius:6px; padding:5px 11px; display:inline-flex; align-items:center;
+    border-radius:6px; padding:5px 11px; display:inline-flex; align-items:center; cursor:default;
     transition:border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
   }
-  .chip:hover{
-    border-color:var(--accent-line); color:var(--text); background:rgba(201,154,75,0.08);
-    transform:translateY(-2px); box-shadow:0 4px 12px -4px rgba(var(--accent-rgb),0.2);
+  @media (hover: hover) and (pointer: fine) {
+    .skill-cat:hover .chip {
+      border-color: rgba(var(--accent-rgb),0.25);
+      background: rgba(22,29,43,0.9);
+    }
+    .chip:hover{
+      border-color:var(--accent); color:#ffffff; background:rgba(var(--accent-rgb),0.14);
+      transform:translateY(-2px); box-shadow:0 4px 12px -4px rgba(var(--accent-rgb),0.25);
+    }
   }
 
   /* ===================== CERTIFICATIONS ===================== */
@@ -1261,20 +1346,21 @@
   .contact-card{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
     padding:20px 24px; text-decoration:none; display:flex; align-items:center; gap:20px;
-    transition:all var(--dur-fast) var(--ease-out); position:relative; overflow:hidden;
+    position:relative; overflow:hidden; cursor:pointer;
   }
-  .contact-card:hover{ border-color:var(--accent-line); transform:translateY(-2px); box-shadow:0 12px 28px -12px rgba(0,0,0,0.5); }
   .contact-icon{
     width:44px; height:44px; border-radius:10px; background:var(--surface-2); border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--accent);
     transition:transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast);
   }
-  .contact-card:hover .contact-icon{ transform:scale(1.08); border-color:var(--accent-line); }
+  @media (hover: hover) and (pointer: fine) {
+    .contact-card:hover .contact-icon{ transform:scale(1.08) rotate(-2deg); border-color:var(--accent-line); }
+    .contact-card:hover .contact-value{ color:var(--accent); }
+  }
   .contact-row{ display:grid; grid-template-columns:90px 1fr; align-items:center; gap:16px; width:100%; }
   @media (max-width:480px){ .contact-row{ grid-template-columns:80px 1fr; gap:12px; } }
   .contact-label{ font-family:var(--mono); font-size:13px; color:var(--text-faint); font-weight:500; }
   .contact-value{ font-size:15px; color:var(--text); font-weight:500; word-break:break-all; transition:color var(--dur-fast); }
-  .contact-card:hover .contact-value{ color:var(--accent); }
 
   footer{ padding:40px 0; }
   .footer-inner{ display:flex; justify-content:center; align-items:center; text-align:center; }
@@ -1440,7 +1526,7 @@
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-node"></div>
-          <div class="tl-card">
+          <div class="tl-card tilt" data-tilt-max="3">
             <div class="tl-head">
               <span class="tl-role">AI / Full Stack Developer</span>
               <span class="tl-dates">Sep 2025 – Sep 2026</span>
@@ -1462,7 +1548,7 @@
 
         <div class="tl-item">
           <div class="tl-node"></div>
-          <div class="tl-card">
+          <div class="tl-card tilt" data-tilt-max="3">
             <div class="tl-head">
               <span class="tl-role">AI/ML Engineer / Python Developer <span style="color:var(--text-faint); font-weight:400;">— promoted from AI/ML Intern</span></span>
               <span class="tl-dates">Jun 2024 – Aug 2025</span>
@@ -1804,7 +1890,7 @@
         <p>Open to AI/ML, GenAI, and full-stack roles in India and the UAE — reach out directly.</p>
       </div>
       <div class="contact-grid">
-        <a class="contact-card" href="mailto:sivasurya06082001@gmail.com">
+        <a class="contact-card tilt" data-tilt-max="3" href="mailto:sivasurya06082001@gmail.com">
           <div class="contact-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </div>
@@ -1814,7 +1900,7 @@
           </div>
         </a>
 
-        <a class="contact-card" href="tel:+918072079799">
+        <a class="contact-card tilt" data-tilt-max="3" href="tel:+918072079799">
           <div class="contact-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
@@ -1824,7 +1910,7 @@
           </div>
         </a>
 
-        <a class="contact-card" href="https://www.linkedin.com/in/sivasurya-ai/" target="_blank" rel="noopener">
+        <a class="contact-card tilt" data-tilt-max="3" href="https://www.linkedin.com/in/sivasurya-ai/" target="_blank" rel="noopener">
           <div class="contact-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
           </div>
@@ -1834,7 +1920,7 @@
           </div>
         </a>
 
-        <a class="contact-card" href="https://github.com/sivasurya681" target="_blank" rel="noopener">
+        <a class="contact-card tilt" data-tilt-max="3" href="https://github.com/sivasurya681" target="_blank" rel="noopener">
           <div class="contact-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
           </div>
@@ -2229,20 +2315,20 @@
 
   /* ---------- 3D Tilt Cards & Surface Spotlights ---------- */
   if(isFinePointer && !reduceMotion){
-    document.querySelectorAll('.tilt').forEach(function(card){
-      var maxDeg = parseFloat(card.dataset.tiltMax || '4');
+    document.querySelectorAll('.tilt, .fact-panel, .tl-card, .featured-project, .project-card, .skill-cat, .cert-card, .resume-card, .contact-card').forEach(function(card){
+      var maxDeg = parseFloat(card.dataset.tiltMax || '3');
       card.addEventListener('mousemove', function(e){
         var rect = card.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width;
         var py = (e.clientY - rect.top) / rect.height;
         var rotY = (px - 0.5) * maxDeg * 2;
         var rotX = (0.5 - py) * maxDeg * 2;
-        card.style.transform = 'perspective(1000px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) translateZ(4px)';
+        card.style.transform = 'perspective(1000px) translateY(-3px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) translateZ(4px)';
         card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
         card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
       }, { passive: true });
       card.addEventListener('mouseleave', function(){
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        card.style.transform = '';
       });
     });
   }
@@ -2288,7 +2374,7 @@
       });
     }, { threshold: 0.08 });
 
-    document.querySelectorAll('section, .featured-project, .skill-cat, .contact-card, .resume-card, .cert-card').forEach(function(el){
+    document.querySelectorAll('section, .featured-project, .project-card, .skill-cat, .contact-card, .resume-card, .cert-card, .fact-panel, .tl-card').forEach(function(el){
       el.classList.add('reveal-on-scroll');
       revealObserver.observe(el);
     });
