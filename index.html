@@ -937,9 +937,6 @@
   .tl-item ul{ margin:0; padding-left:18px; color:var(--text-muted); font-size:15px; }
   .tl-item li{ margin-bottom:9px; }
   .tl-item li:last-child{ margin-bottom:0; }
-  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
-  .tag{ font-family:var(--mono); font-size:11.5px; color:var(--blue); background:var(--blue-soft); border-radius:5px; padding:4px 9px; transition:transform var(--dur-fast), background var(--dur-fast), color var(--dur-fast); }
-  .tl-card:hover .tag, .featured-project:hover .tag, .project-card:hover .tag{ transform:translateY(-2px); background:rgba(111,160,214,0.2); }
 
   /* ===================== PROJECTS ===================== */
   .featured-project{
@@ -949,7 +946,6 @@
   .fp-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:18px;}
   .fp-title{ font-size:24px; margin-bottom:8px; }
   .fp-sub{ color:var(--text-muted); font-size:14.5px; max-width:60ch; }
-  .fp-stack{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
   .case-toggle{
     background:transparent; border:1px solid var(--line); color:var(--accent); font-family:var(--mono);
     font-size:13px; padding:9px 16px; border-radius:8px; cursor:pointer; white-space:nowrap;
@@ -972,7 +968,6 @@
   .project-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; transition:all var(--dur-med) var(--ease-out); }
   .project-card h4{ font-size:16px; margin-bottom:8px; }
   .project-card p{ color:var(--text-muted); font-size:14px; margin-bottom:14px; }
-  .project-card .tag-row{ margin-top:0; }
 
   /* ===================== SKILLS ===================== */
   .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
@@ -980,20 +975,70 @@
   @media (max-width:560px){ .skills-grid{ grid-template-columns:1fr; } }
   .skill-cat{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; cursor:default; }
   .skill-cat h4{ font-size:13px; font-family:var(--mono); color:var(--accent); margin-bottom:14px; }
-  .chip-row{ display:flex; flex-wrap:wrap; gap:7px; }
-  .chip{
-    font-size:13px; color:var(--text-muted); background:var(--surface-2); border:1px solid var(--line);
-    border-radius:6px; padding:5px 11px; display:inline-flex; align-items:center; cursor:default;
-    transition:border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
+
+  /* ===================== GLOBAL TECH TAG / CHIP HOVER SYSTEM ===================== */
+  .tag-row, .chip-row, .fp-stack { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .project-card .tag-row { margin-top:0; }
+
+  .tag, .chip, .spec-badge {
+    font-family: var(--mono);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    cursor: default;
+    position: relative;
+    user-select: none;
+    transition: transform var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out),
+                color var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-fast) var(--ease-out);
+    will-change: transform;
   }
+
+  .tag {
+    font-size: 11.5px;
+    color: var(--blue);
+    background: var(--blue-soft);
+    border: 1px solid rgba(111, 160, 214, 0.22);
+    padding: 4px 9.5px;
+  }
+
+  .chip {
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 5px 11px;
+  }
+
+  .spec-badge {
+    font-size: 12.5px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 3.5px 9.5px;
+  }
+
+  /* Independent Desktop Hover Contract for Individual Technology Chips & Badges */
   @media (hover: hover) and (pointer: fine) {
-    .skill-cat:hover .chip {
-      border-color: rgba(var(--accent-rgb),0.25);
-      background: rgba(22,29,43,0.9);
+    .spec-badge:hover,
+    .tag:hover,
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(var(--accent-rgb), 0.65) !important;
+      background: rgba(var(--accent-rgb), 0.15) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px -3px rgba(var(--accent-rgb), 0.38), 0 0 10px -2px rgba(var(--accent-rgb), 0.22) !important;
+      z-index: 3;
     }
-    .chip:hover{
-      border-color:var(--accent); color:#ffffff; background:rgba(var(--accent-rgb),0.14);
-      transform:translateY(-2px); box-shadow:0 4px 12px -4px rgba(var(--accent-rgb),0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spec-badge:hover,
+    .tag:hover,
+    .chip:hover {
+      transform: none !important;
     }
   }
 
@@ -2024,6 +2069,9 @@
               <h3 class="cert-title">${cert.name}</h3>
             </div>
             <div class="cert-badge-icon" aria-hidden="true">${cert.icon}</div>
+          </div>
+          <div class="tag-row" style="margin-top:14px; margin-bottom:14px;">
+            ${cert.skills.map(function(s){ return '<span class="tag">' + s + '</span>'; }).join('')}
           </div>
         </div>
         <div class="cert-footer-row">
