@@ -1982,7 +1982,7 @@
 <!-- CERTIFICATION DETAIL MODAL -->
 <div id="cert-modal" class="cert-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-cert-title">
   <div class="cert-modal-backdrop" id="modalBackdrop"></div>
-  <div class="cert-modal-content tilt" data-tilt-max="2">
+  <div class="cert-modal-content">
     <button type="button" class="cert-modal-close" id="modalClose" aria-label="Close modal">✕</button>
     <div class="cert-modal-header">
       <div class="cert-modal-icon" id="modalCertIcon"></div>
@@ -2108,7 +2108,7 @@
     skillsContainer.innerHTML = '';
     cert.skills.forEach(function(skill) {
       var span = document.createElement('span');
-      span.className = 'chip';
+      span.className = 'tag chip';
       span.textContent = skill;
       skillsContainer.appendChild(span);
     });
