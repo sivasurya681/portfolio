@@ -968,6 +968,8 @@
   .project-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; transition:all var(--dur-med) var(--ease-out); }
   .project-card h4{ font-size:16px; margin-bottom:8px; }
   .project-card p{ color:var(--text-muted); font-size:14px; margin-bottom:14px; }
+  .project-card-footer{ margin-top:16px; display:flex; justify-content:flex-end; }
+  .project-card .case-body.open{ margin-top:18px; }
 
   /* ===================== SKILLS ===================== */
   .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
@@ -1041,6 +1043,29 @@
       transform: none !important;
     }
   }
+
+  /* Technologies with a documented usage entry get a click affordance,
+     without changing their existing visual identity or hover behavior */
+  .tag.tech-interactive, .chip.tech-interactive, .spec-badge.tech-interactive {
+    cursor: pointer;
+  }
+  .tag.tech-interactive::after, .chip.tech-interactive::after {
+    content: '';
+    width: 3px; height: 3px; border-radius: 50%;
+    background: currentColor; opacity: 0.55;
+    margin-left: 6px; display: inline-block; vertical-align: middle;
+  }
+
+  /* Technology usage modal content (reuses .cert-modal / .cert-modal-content) */
+  .cert-modal-content { max-height: 82vh; overflow-y: auto; }
+  .tech-usage-project { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .tech-usage-project:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .tech-usage-project-name { font-size: 15.5px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+  .tech-usage-field { margin-bottom: 10px; }
+  .tech-usage-field:last-child { margin-bottom: 0; }
+  .tech-usage-field h5 { font-family: var(--mono); font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; font-weight: 600; }
+  .tech-usage-field p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+  .tech-usage-undocumented { font-size: 14px; color: var(--text-muted); font-style: italic; }
 
   /* ===================== CERTIFICATIONS ===================== */
   .cert-summary-row { margin-bottom: 24px; }
@@ -1619,7 +1644,7 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">Projects</div>
-        <h2>Selected Systems &amp; Projects</h2>
+        <h2>Projects</h2>
         <p>Production systems, NLP pipelines, and AI applications shipped across recent engineering roles.</p>
       </div>
 
@@ -1630,7 +1655,7 @@
             <h3 class="fp-title">SkandaxHIRE — AI Recruitment &amp; Talent Assessment Platform</h3>
             <p class="fp-sub">A full-stack AI recruitment platform covering resume intelligence, semantic candidate-job matching, interview automation, and KYC.</p>
             <div class="fp-stack" style="margin-top: 18px;">
-              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">OpenAI API</span><span class="tag">NLP</span>
+              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">OpenAI API</span><span class="tag">NLP</span><span class="tag">Document Processing</span>
             </div>
           </div>
           <div class="terminal" style="width: 100%; max-width: 320px; flex-shrink: 0; box-shadow: 0 12px 30px -15px rgba(0,0,0,0.6);">
@@ -1725,21 +1750,112 @@
           <h4>SkandaxONBO — HR Onboarding &amp; Document Platform</h4>
           <p>Investigated an existing onboarding codebase and database schema, built and validated dynamic document templates and PDF generation, and diagnosed a live template-loading bug through API and regression testing.</p>
           <div class="tag-row"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Document Processing</span></div>
+          <div class="project-card-footer">
+            <button class="case-toggle" data-target="case-onbo" aria-expanded="false">View case study ↗</button>
+          </div>
+          <div class="case-body" id="case-onbo">
+            <div class="case-body-inner">
+              <div class="case-grid">
+                <div class="case-block">
+                  <h4>Problem</h4>
+                  <p>A live "failed to load template" issue was affecting users of an existing HR onboarding and document-generation system, and any fix had to be made safely inside a codebase and database schema I hadn't built myself.</p>
+                </div>
+                <div class="case-block">
+                  <h4>Approach</h4>
+                  <ul>
+                    <li>Analyzed the existing SkandaxONBO codebase and database schema before making changes</li>
+                    <li>Diagnosed the template-loading bug by validating the templates API and checking editor-vs-generated-document consistency</li>
+                    <li>Ran regression validation and bug verification across template, document-generation, and admin workflows</li>
+                    <li>Debugged integration boundaries between the frontend, backend APIs, and the database layer</li>
+                  </ul>
+                </div>
+                <div class="case-block">
+                  <h4>My contribution</h4>
+                  <p>Worked as the AI/Full Stack Developer responsible for tracing the bug end-to-end across the API and database layers on Python and FastAPI, then verifying the fix through regression testing.</p>
+                </div>
+                <div class="case-block">
+                  <h4>Outcome</h4>
+                  <p>Template loading was stabilized and regression coverage across the affected document-generation and admin workflows was strengthened.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="project-card tilt" data-tilt-max="3">
           <h4>LETA X — AI-Powered Tourism Platform</h4>
           <p>Built responsive, role-based front-end dashboards in React.js for an AI-driven travel-planning platform, integrating AI-generated recommendations into reusable UI components.</p>
           <div class="tag-row"><span class="tag">React.js</span></div>
+          <div class="project-card-footer">
+            <button class="case-toggle" data-target="case-letax" aria-expanded="false">View case study ↗</button>
+          </div>
+          <div class="case-body" id="case-letax">
+            <div class="case-body-inner">
+              <div class="case-grid">
+                <div class="case-block">
+                  <h4>Problem</h4>
+                  <p>An AI-driven travel-planning platform needed a front end that could present AI-generated recommendations clearly to different types of users.</p>
+                </div>
+                <div class="case-block">
+                  <h4>My contribution</h4>
+                  <ul>
+                    <li>Built responsive, role-based dashboards in React.js</li>
+                    <li>Surfaced AI-generated recommendations through the interface</li>
+                    <li>Integrated those recommendations into reusable UI components</li>
+                  </ul>
+                </div>
+                <div class="case-block">
+                  <h4>Scope</h4>
+                  <p>This was a front-end contribution to a larger product built alongside a team, rather than a solo end-to-end build.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="project-card tilt" data-tilt-max="3">
           <h4>IT Asset Management System</h4>
           <p>A centralized application for IT asset tracking, allocation, and lifecycle management, with reporting that improved inventory visibility and reduced manual tracking effort.</p>
           <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span></div>
+          <div class="project-card-footer">
+            <button class="case-toggle" data-target="case-itam" aria-expanded="false">View case study ↗</button>
+          </div>
+          <div class="case-body" id="case-itam">
+            <div class="case-body-inner">
+              <div class="case-grid">
+                <div class="case-block">
+                  <h4>Overview</h4>
+                  <p>A centralized application for tracking IT assets, managing allocation, and following assets through their lifecycle, built with Python and SQL.</p>
+                </div>
+                <div class="case-block">
+                  <h4>Outcome</h4>
+                  <p>Reporting improved inventory visibility and reduced manual tracking effort.</p>
+                </div>
+              </div>
+              <p style="color:var(--text-faint); font-size:13px; margin-top:16px;">Limited additional documentation is available for this project; the summary above reflects what's currently in my portfolio.</p>
+            </div>
+          </div>
         </div>
         <div class="project-card tilt" data-tilt-max="3">
           <h4>COVID-19 Data Analysis</h4>
           <p>Exploratory data analysis on public health datasets covering cases, deaths, recoveries, and regional trends, with interactive Tableau dashboards for non-technical audiences.</p>
           <div class="tag-row"><span class="tag">Tableau</span><span class="tag">EDA</span></div>
+          <div class="project-card-footer">
+            <button class="case-toggle" data-target="case-covid" aria-expanded="false">View case study ↗</button>
+          </div>
+          <div class="case-body" id="case-covid">
+            <div class="case-body-inner">
+              <div class="case-grid">
+                <div class="case-block">
+                  <h4>Overview</h4>
+                  <p>Exploratory data analysis on public COVID-19 datasets, covering cases, deaths, recoveries, and regional trends.</p>
+                </div>
+                <div class="case-block">
+                  <h4>Outcome</h4>
+                  <p>Delivered interactive Tableau dashboards that made the trends accessible to non-technical audiences.</p>
+                </div>
+              </div>
+              <p style="color:var(--text-faint); font-size:13px; margin-top:16px;">Limited additional documentation is available for this project; the summary above reflects what's currently in my portfolio.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2004,6 +2120,21 @@
   </div>
 </div>
 
+<!-- Technology Usage Modal (click-activated, shared across the whole portfolio) -->
+<div id="tech-modal" class="cert-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="techModalTitle">
+  <div class="cert-modal-backdrop" id="techModalBackdrop"></div>
+  <div class="cert-modal-content">
+    <button type="button" class="cert-modal-close" id="techModalClose" aria-label="Close">✕</button>
+    <div class="cert-modal-header">
+      <div>
+        <span class="cert-modal-issuer">Where &amp; how I used this</span>
+        <h3 id="techModalTitle" class="cert-modal-title"></h3>
+      </div>
+    </div>
+    <div class="cert-modal-body" id="techModalBody"></div>
+  </div>
+</div>
+
 <footer>
   <div class="container footer-inner">
     <div class="fmeta">© 2026 Siva Surya. AI/ML Engineer · Chennai, India.</div>
@@ -2016,6 +2147,493 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+  /* =====================================================================
+     GLOBAL TECHNOLOGY USAGE EXPLORER (click-activated)
+     Centralized tech metadata + one reusable modal dialog, applied to every
+     .tag / .chip / .spec-badge on the page (Skills, Experience, Projects,
+     Certifications). Opens ONLY on click / Enter / Space — never on hover
+     or on focus alone. Every usage description below is drawn only from
+     content that already appears elsewhere on this page; technologies with
+     no documented project-specific usage say so explicitly rather than
+     guessing.
+     ===================================================================== */
+  (function(){
+
+    // Canonical technology -> { name, aliases, usages }.
+    // usages: [] or omitted => shown as "not specifically documented".
+    // Each usage: { project, where, why, how, work }
+    var TECH_DATA = {
+      "python": {
+        name: "Python",
+        aliases: ["python"],
+        usages: [
+          { project: "SkandaxHIRE", where: "Backend", why: "Core language for building the recruitment platform's features end-to-end.", how: "Used for recruitment features and backend development.", work: "Resume parsing, ATS scoring, candidate ranking, and interview-automation modules." },
+          { project: "SkandaxONBO", where: "Backend", why: "Backend language for the onboarding and document-generation platform.", how: "Used for backend and document-related workflows while investigating the existing codebase.", work: "Dynamic document templates, PDF-generation validation, and the template-loading bug investigation." },
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "Language for the complete application and ML pipeline.", how: "Used across resume parsing, matching, and prediction logic.", work: "Automated resume parsing, TF-IDF matching pipeline, and the job-title prediction pipeline." },
+          { project: "IT Asset Management System", where: "Backend", why: "Language for the asset-management application.", how: "Used for application development for asset tracking and lifecycle logic.", work: "IT asset tracking, allocation, and lifecycle-management features." }
+        ]
+      },
+      "fastapi": {
+        name: "FastAPI",
+        aliases: ["fastapi"],
+        usages: [
+          { project: "SkandaxHIRE", where: "API integration", why: "Framework for exposing recruitment features as APIs to recruiter and job-seeker dashboards.", how: "Used for recruitment APIs and backend services.", work: "APIs behind resume analysis, candidate assessment, and recruitment workflows." },
+          { project: "SkandaxONBO", where: "API integration", why: "API layer for templates and document generation, where the reported bug surfaced.", how: "Used for template and document-related APIs.", work: "Validated the templates API while diagnosing the 'failed to load template' issue." }
+        ]
+      },
+      "flask": {
+        name: "Flask",
+        aliases: ["flask"],
+        usages: [
+          { project: "CareerBuddy AI", where: "Backend", why: "Backend/API prototype work for the career-recommendation platform.", how: "Used for backend/API prototyping.", work: "Backend/API prototype supporting CareerBuddy AI." }
+        ]
+      },
+      "openai-api": {
+        name: "OpenAI API",
+        aliases: ["openai api"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Powers resume analysis, candidate assessment, and generated content.", how: "Used for resume analysis, candidate assessment, and content generation.", work: "AI-driven resume analysis, cover-letter generation, and interview question generation." },
+          { project: "Multilingual AI Hub", where: "AI/ML pipeline", why: "Backs translation and generation features for the multilingual document platform.", how: "Used for AI-powered multilingual workflows.", work: "Translation, transcription, and document-generation workflows across languages." }
+        ]
+      },
+      "react": {
+        name: "React.js",
+        aliases: ["react.js", "react"],
+        usages: [
+          { project: "LETA X", where: "Frontend", why: "Needed responsive, role-based dashboards to present AI-generated travel recommendations.", how: "Used for responsive, role-based frontend dashboards.", work: "Role-based dashboards, responsive UI, and reusable UI components integrating AI-generated recommendations." }
+        ]
+      },
+      "nlp": {
+        name: "NLP",
+        aliases: ["nlp"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Needed to understand resume content for skill extraction and matching.", how: "Used for resume parsing, skill extraction, and candidate-job matching.", work: "Skill extraction and semantic resume-to-job matching." },
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "Core to processing resumes for career recommendations.", how: "Used for resume and career-recommendation processing.", work: "Feeds the TF-IDF matching and job-title prediction pipeline." }
+        ]
+      },
+      "tfidf": {
+        name: "TF-IDF",
+        aliases: ["tf-idf", "tfidf"],
+        usages: [
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "Chosen as the matching algorithm between resumes and job/career data.", how: "Used for resume-to-job matching.", work: "TF-IDF-based matching pipeline feeding job-title prediction and recommendations." }
+        ]
+      },
+      "flet": {
+        name: "Flet",
+        aliases: ["flet"],
+        usages: [
+          { project: "CareerBuddy AI", where: "Frontend", why: "Needed a conversational interface rather than a static results page.", how: "Used to build the chatbot-based user interface.", work: "Conversational, chatbot-driven career-guidance experience." }
+        ]
+      },
+      "web-scraping": {
+        name: "Web Scraping",
+        aliases: ["web scraping"],
+        usages: [
+          { project: "CareerBuddy AI", where: "Automation", why: "Needed fresh job-listing data from multiple job boards.", how: "Used to collect job listings from multiple job boards.", work: "Automated job-scraping workflows, cutting data-collection time by 30%." }
+        ]
+      },
+      "document-processing": {
+        name: "Document Processing",
+        aliases: ["document processing"],
+        usages: [
+          { project: "SkandaxHIRE", where: "Document processing", why: "Recruitment content like cover letters and interview questions needed to be generated reliably rather than written manually.", how: "Generated via prompt-driven templates feeding the OpenAI API.", work: "Cover-letter generation and interview-question generation as part of the recruitment workflow." },
+          { project: "SkandaxONBO", where: "Document processing", why: "The platform generates onboarding documents dynamically, and a template-loading bug needed a fix grounded in how documents are actually produced.", how: "Used for dynamic templates and generated documents.", work: "Built and validated dynamic document templates and PDF generation; diagnosed the 'failed to load template' issue via the templates API and editor-vs-generated-document checks." }
+        ]
+      },
+      "sql": {
+        name: "SQL",
+        aliases: ["sql"],
+        usages: [
+          { project: "IT Asset Management System", where: "Database", why: "Stores asset records, allocations, and lifecycle status.", how: "Used for asset data and database operations.", work: "Backed the asset-tracking application's data layer." }
+        ]
+      },
+      "mysql": {
+        name: "MySQL",
+        aliases: ["mysql"],
+        usages: [
+          { project: "IT Asset Management System", where: "Database", why: "Database management for tracking asset records, allocation, and lifecycle status.", how: "Used for database management.", work: "Database layer for the IT Asset Management System." }
+        ]
+      },
+      "schema-analysis": {
+        name: "Schema Analysis",
+        aliases: ["schema analysis"],
+        usages: [
+          { project: "SkandaxONBO", where: "Database", why: "Required before safely extending or debugging an existing system.", how: "Used to understand the existing database schema.", work: "Analyzed the existing database schema to support reliable feature development and bug diagnosis." }
+        ]
+      },
+      "api-validation": {
+        name: "API Validation",
+        aliases: ["api validation"],
+        usages: [
+          { project: "SkandaxHIRE", where: "API integration", why: "Recruitment features are exposed as APIs consumed by dashboards.", how: "Used to test and validate recruitment APIs.", work: "Validation of resume, interview, and KYC-related APIs." },
+          { project: "SkandaxONBO", where: "API integration", why: "The reported bug traced back to inconsistent behavior in the templates API.", how: "Used to test the template API and document workflows.", work: "Validated the templates API response against editor and generated-document output." }
+        ]
+      },
+      "tableau": {
+        name: "Tableau",
+        aliases: ["tableau"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Needed to make public-health trends understandable to non-technical audiences.", how: "Used to build interactive dashboards.", work: "Dashboards covering cases, deaths, recoveries, and regional trends." }
+        ]
+      },
+      "eda": {
+        name: "EDA",
+        aliases: ["eda"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "First step in understanding trends in the raw public-health datasets.", how: "Used to analyze public-health datasets.", work: "Exploratory analysis of cases, deaths, recoveries, and regional trends ahead of building dashboards." }
+        ]
+      },
+      "pdf-generation": {
+        name: "PDF Generation",
+        aliases: ["pdf generation"],
+        usages: [
+          { project: "SkandaxONBO", where: "Document processing", why: "Onboarding documents needed to be generated dynamically and reliably.", how: "Used to generate and validate dynamic documents.", work: "PDF generation validation as part of the document-template workflow." },
+          { project: "Multilingual AI Hub", where: "Document processing", why: "The platform generates documents as PDFs across languages.", how: "Used to generate translated PDF documents.", work: "PDF output as part of the multilingual document platform, addressing Tamil-language rendering fidelity." }
+        ]
+      },
+      "docx-processing": {
+        name: "DOCX Processing",
+        aliases: ["docx processing"],
+        usages: [
+          { project: "Multilingual AI Hub", where: "Document processing", why: "Documents also needed to be produced/translated as DOCX files.", how: "Used to process and generate DOCX files.", work: "DOCX generation and translation alongside PDF output." }
+        ]
+      },
+      "multilingual-localization": {
+        name: "Multilingual Localization",
+        aliases: ["multilingual localization"],
+        usages: [
+          { project: "Multilingual AI Hub", where: "Document processing", why: "Documents needed to render correctly in Tamil, not just be translated.", how: "Used for different-language and Tamil-rendering support.", work: "Tamil-language rendering and alignment to preserve document fidelity across languages." }
+        ]
+      },
+      "translation": {
+        name: "Translation",
+        aliases: ["translation"],
+        usages: [
+          { project: "Multilingual AI Hub", where: "AI/ML pipeline", why: "Core capability of the multilingual document platform.", how: "Used for multilingual document translation.", work: "Translation features feeding PDF/DOCX generation." }
+        ]
+      },
+      "text-to-speech": {
+        name: "Text-to-Speech",
+        aliases: ["text-to-speech"],
+        usages: [
+          { project: "Multilingual AI Hub", where: "AI/ML pipeline", why: "Part of the hub's speech capabilities alongside transcription.", how: "Used to convert text to speech.", work: "Text-to-speech functionality within the Multilingual AI Hub's speech workflows." }
+        ]
+      },
+      "machine-learning": {
+        name: "Machine Learning",
+        aliases: ["machine learning"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Needed to rank and route candidates intelligently rather than manually.", how: "Used for candidate ranking and intelligent recruitment workflows.", work: "Candidate ranking within the recruitment pipeline." },
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "Underpins the job-title prediction pipeline.", how: "Used for job-title prediction.", work: "End-to-end job-title prediction pipeline that improved prediction accuracy by 15%." }
+        ]
+      },
+      "deep-learning": {
+        name: "Deep Learning",
+        aliases: ["deep learning"],
+        usages: [
+          { project: "Certification — Data Science with Machine &amp; Deep Learning", where: "Certification", why: "Listed as a certified skill area.", how: "Covered by specialized training in predictive modeling and deep neural networks.", work: null }
+        ]
+      },
+      "scikit-learn": {
+        name: "Scikit-learn",
+        aliases: ["scikit-learn", "scikit learn"],
+        usages: [
+          { project: "Certification — Data Science with Machine &amp; Deep Learning", where: "Certification", why: "Listed as a certified skill area.", how: "Covered by specialized training in predictive modeling and machine learning deployment.", work: null }
+        ]
+      },
+      "tensorflow": {
+        name: "TensorFlow",
+        aliases: ["tensorflow"],
+        usages: [
+          { project: "Certification — Data Science with Machine &amp; Deep Learning", where: "Certification", why: "Listed as a certified skill area.", how: "Covered by specialized training in deep neural networks.", work: null }
+        ]
+      },
+      "opencv": {
+        name: "OpenCV",
+        aliases: ["opencv"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Face verification / image processing during candidate verification.", how: "Used for face verification.", work: "Face verification / image processing within SkandaxHIRE." }
+        ]
+      },
+      "genai": {
+        name: "GenAI",
+        aliases: ["genai", "gen ai"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Recruitment content and matching needed generative AI rather than static rules.", how: "Used generative AI (OpenAI APIs, prompt engineering) across resume analysis and content generation.", work: "Resume analysis, cover-letter generation, and interview-question generation." },
+          { project: "Multilingual AI Hub", where: "AI/ML pipeline", why: "Translation, speech, and document generation needed a generative AI backbone.", how: "Used generative AI across translation, speech, and document-generation workflows.", work: "Translation, text-to-speech, and PDF/DOCX generation across languages." }
+        ]
+      },
+      "llms": {
+        name: "LLMs",
+        aliases: ["llms", "llm"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Powers resume understanding, matching, and generated content.", how: "Used for AI-powered recruitment workflows.", work: "LLM-backed resume analysis and content generation, alongside NLP for skill extraction." }
+        ]
+      },
+      "prompt-engineering": {
+        name: "Prompt Engineering",
+        aliases: ["prompt engineering"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Needed to keep AI responses fast and reliable at production load.", how: "Used to improve AI response quality and reliability.", work: "Applied alongside caching to reduce OpenAI API response latency." },
+          { project: "Multilingual AI Hub", where: "AI/ML pipeline", why: "Same reliability/latency goals applied to multilingual workflows.", how: "Used to improve AI workflow quality.", work: "Applied alongside caching across multilingual API calls." }
+        ]
+      },
+      "embedding-models": {
+        name: "Embedding Models",
+        aliases: ["embedding models"],
+        usages: [
+          { project: "SkandaxHIRE", where: "AI/ML pipeline", why: "Needed to compare resume content against job descriptions semantically.", how: "Used for resume-text and job-description semantic matching.", work: "Semantic candidate-to-job matching." }
+        ]
+      },
+      "nltk": {
+        name: "NLTK",
+        aliases: ["nltk"],
+        usages: [
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "NLP text processing for resumes.", how: "Used for NLP text processing.", work: "Text processing supporting resume/career-matching features." }
+        ]
+      },
+      "spacy": {
+        name: "spaCy",
+        aliases: ["spacy"],
+        usages: [
+          { project: "CareerBuddy AI", where: "AI/ML pipeline", why: "Resume text processing to support matching.", how: "Used for resume text processing.", work: "Resume text processing supporting matching features." }
+        ]
+      },
+      "streamlit": {
+        name: "Streamlit",
+        aliases: ["streamlit"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Data dashboard for exploring public-health data.", how: "Used to build a data dashboard.", work: "Data dashboard for COVID-19 Data Analysis." }
+        ]
+      },
+      "aws": {
+        name: "AWS",
+        aliases: ["aws"],
+        usages: [
+          { project: "SkandaxHIRE", where: "Other", why: "Cloud deployment exposure.", how: "Used for cloud deployment exposure.", work: "Cloud deployment exposure within SkandaxHIRE." }
+        ]
+      },
+      "git": {
+        name: "Git",
+        aliases: ["git"],
+        dynamicAllProjects: true,
+        usageTemplate: { where: "Other", why: "Version control across development work.", how: "Used for version control.", work: "Version control for this project." }
+      },
+      "github": {
+        name: "GitHub",
+        aliases: ["github"],
+        dynamicAllProjects: true,
+        usageTemplate: { where: "Other", why: "Code hosting and collaboration for development work.", how: "Used for code repository hosting.", work: "Code repository for this project." }
+      },
+      "postman": {
+        name: "Postman",
+        aliases: ["postman"],
+        usages: [
+          { project: "SkandaxHIRE", where: "API integration", why: "API testing for recruitment-platform endpoints.", how: "Used for API testing.", work: "API testing for SkandaxHIRE's recruitment APIs." },
+          { project: "SkandaxONBO", where: "API integration", why: "API testing for the onboarding/document platform's endpoints.", how: "Used for API testing.", work: "API testing for SkandaxONBO's template and document APIs." }
+        ]
+      },
+      "pandas": {
+        name: "Pandas",
+        aliases: ["pandas"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Data processing and analysis of public-health datasets.", how: "Used for data processing.", work: "Data processing and analysis for COVID-19 Data Analysis." }
+        ]
+      },
+      "numpy": {
+        name: "NumPy",
+        aliases: ["numpy"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Numerical analysis of public-health datasets.", how: "Used for numerical analysis.", work: "Numerical analysis supporting COVID-19 Data Analysis." }
+        ]
+      },
+      "pyspark": {
+        name: "PySpark",
+        aliases: ["pyspark"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Large-scale data processing of public-health datasets.", how: "Used for large-scale data processing.", work: "Large-scale data processing for COVID-19 Data Analysis." }
+        ]
+      },
+      "power-bi": {
+        name: "Power BI",
+        aliases: ["power bi"],
+        usages: [
+          { project: "COVID-19 Data Analysis", where: "Data & visualization", why: "Dashboard and reporting on public-health trends.", how: "Used for dashboard & reporting.", work: "Dashboard & reporting for COVID-19 Data Analysis." }
+        ]
+      },
+      "data-science": {
+        name: "Data Science",
+        aliases: ["data science"],
+        usages: [
+          { project: "Certification — Python for Data Science", where: "Certification", why: "Certified skill area.", how: "Covered by the NPTEL 'Python for Data Science' certification.", work: null }
+        ]
+      },
+      "data-wrangling": {
+        name: "Data Wrangling",
+        aliases: ["data wrangling"],
+        usages: [
+          { project: "Certification — Python for Data Science", where: "Certification", why: "Certified skill area.", how: "Covered by the NPTEL 'Python for Data Science' certification.", work: null }
+        ]
+      },
+      "statistical-analysis": {
+        name: "Statistical Analysis",
+        aliases: ["statistical analysis"],
+        usages: [
+          { project: "Certification — Python for Data Science", where: "Certification", why: "Certified skill area.", how: "Covered by the NPTEL 'Python for Data Science' certification.", work: null }
+        ]
+      },
+      "full-stack": {
+        name: "Full Stack",
+        aliases: ["full stack", "python full stack"],
+        usages: [
+          { project: "SkandaxHIRE &amp; SkandaxONBO", where: "Backend &amp; API integration", why: "Both platforms needed Python backend work consumed by the same dashboards it was built for, not just isolated scripts.", how: "Built and validated Python/FastAPI backend features, then consumed/debugged those APIs across the frontend, database, and admin layers.", work: "Cross-stack feature work spanning backend APIs, database schema, and downstream dashboards." },
+          { project: "Certification — Full Stack Developer Course", where: "Certification", why: "Certified skill area, reflected in the cross-stack work above.", how: "Covered by the Novitech 'Full Stack Developer Course' certification.", work: null }
+        ]
+      },
+      "web-development": {
+        name: "Web Development",
+        aliases: ["web development"],
+        usages: [
+          { project: "Certification — Full Stack Developer Course", where: "Certification", why: "Certified skill area.", how: "Covered by the Novitech 'Full Stack Developer Course' certification.", work: null }
+        ]
+      },
+      "database-integration": {
+        name: "Database Integration",
+        aliases: ["database integration"],
+        usages: [
+          { project: "Certification — Full Stack Developer Course", where: "Certification", why: "Certified skill area, reflected in the schema/database work on SkandaxONBO.", how: "Covered by the Novitech 'Full Stack Developer Course' certification.", work: null }
+        ]
+      }
+    };
+
+    var ALIAS_MAP = {};
+    Object.keys(TECH_DATA).forEach(function(id){
+      (TECH_DATA[id].aliases || []).forEach(function(alias){ ALIAS_MAP[alias] = id; });
+    });
+
+    function normalize(text){
+      return (text || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function resolveTechId(rawText){
+      return ALIAS_MAP[normalize(rawText)] || null;
+    }
+
+    /* ---------- Shared modal (reuses the existing cert-modal component) ---------- */
+    var techModal = document.getElementById('tech-modal');
+    var techModalBackdrop = document.getElementById('techModalBackdrop');
+    var techModalClose = document.getElementById('techModalClose');
+    var techModalTitle = document.getElementById('techModalTitle');
+    var techModalBody = document.getElementById('techModalBody');
+    var lastTrigger = null;
+
+    /* Reads the actual project names currently rendered on the page,
+       instead of hardcoding a project list (used for Git/GitHub, which
+       apply to "all projects" rather than one). */
+    function getAllProjectNames(){
+      var names = [];
+      document.querySelectorAll('.fp-title').forEach(function(el){
+        var n = el.textContent.split('—')[0].trim();
+        if (n && names.indexOf(n) === -1) names.push(n);
+      });
+      document.querySelectorAll('.project-card > h4').forEach(function(el){
+        var n = el.textContent.split('—')[0].trim();
+        if (n && names.indexOf(n) === -1) names.push(n);
+      });
+      return names;
+    }
+
+    function renderModalBody(techId){
+      var data = TECH_DATA[techId];
+      var usages = (data && data.usages) || [];
+      if (data && data.dynamicAllProjects) {
+        var tpl = data.usageTemplate || {};
+        usages = getAllProjectNames().map(function(name){
+          return { project: name, where: tpl.where, why: tpl.why, how: tpl.how, work: tpl.work };
+        });
+      }
+      if (!usages.length) {
+        return '<p class="tech-usage-undocumented">Project usage not specifically documented in this portfolio.</p>';
+      }
+      return usages.map(function(u){
+        var fields = '';
+        fields += '<div class="tech-usage-field"><h5>Where</h5><p>' + u.where + '</p></div>';
+        fields += '<div class="tech-usage-field"><h5>Why</h5><p>' + u.why + '</p></div>';
+        fields += '<div class="tech-usage-field"><h5>How</h5><p>' + u.how + '</p></div>';
+        if (u.work) {
+          fields += '<div class="tech-usage-field"><h5>Work completed</h5><p>' + u.work + '</p></div>';
+        }
+        return '<div class="tech-usage-project"><div class="tech-usage-project-name">' + u.project + '</div>' + fields + '</div>';
+      }).join('');
+    }
+
+    function openTechModal(trigger, techId){
+      if (!techModal) return;
+      var data = TECH_DATA[techId];
+      if (!data) return;
+      lastTrigger = trigger;
+      techModalTitle.textContent = data.name;
+      techModalBody.innerHTML = renderModalBody(techId);
+      techModal.classList.add('open');
+      techModal.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+      techModalClose.focus();
+    }
+
+    function closeTechModal(){
+      if (!techModal || !techModal.classList.contains('open')) return;
+      techModal.classList.remove('open');
+      techModal.setAttribute('aria-hidden', 'true');
+      if (lastTrigger) {
+        lastTrigger.setAttribute('aria-expanded', 'false');
+        lastTrigger.focus();
+      }
+      lastTrigger = null;
+    }
+
+    if (techModalClose) techModalClose.addEventListener('click', closeTechModal);
+    if (techModalBackdrop) techModalBackdrop.addEventListener('click', closeTechModal);
+    window.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && techModal && techModal.classList.contains('open')) {
+        closeTechModal();
+      }
+    });
+
+    function wireTrigger(el, techId){
+      if (el.dataset.techWired) return;
+      el.dataset.techWired = '1';
+      el.classList.add('tech-interactive');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-haspopup', 'dialog');
+      el.setAttribute('aria-expanded', 'false');
+      el.setAttribute('aria-label', TECH_DATA[techId].name + ' — view where and how this was used');
+
+      // Click-only activation. No mouseenter/mouseleave/focus/blur listeners —
+      // the existing decorative hover (transform/glow) is CSS-only and untouched.
+      el.addEventListener('click', function(e){
+        e.stopPropagation(); // don't also trigger a parent card's own click handler (e.g. cert cards)
+        openTechModal(el, techId);
+      });
+      el.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          openTechModal(el, techId);
+        }
+      });
+    }
+
+    window.enhanceTechTags = function(root){
+      root = root || document;
+      root.querySelectorAll('.tag, .chip, .spec-badge').forEach(function(el){
+        var techId = resolveTechId(el.textContent);
+        if (techId) wireTrigger(el, techId);
+      });
+    };
+  })();
+
 
   /* ---------- PART 2: CERTIFICATIONS DATA & RENDER ---------- */
   var CERTIFICATIONS_DATA = [
@@ -2112,6 +2730,7 @@
       span.textContent = skill;
       skillsContainer.appendChild(span);
     });
+    if (window.enhanceTechTags) window.enhanceTechTags(skillsContainer);
 
     certModal.classList.add('open');
     certModal.setAttribute('aria-hidden', 'false');
@@ -2133,6 +2752,7 @@
   });
 
   renderCertifications();
+  if (window.enhanceTechTags) window.enhanceTechTags(document);
 
   /* ---------- PART 1: 3D UAE RESUME FLIGHT EXPERIENCE ---------- */
   var btnUaeDownload = document.getElementById('btn-uae-download');
@@ -2366,6 +2986,10 @@
     document.querySelectorAll('.tilt, .fact-panel, .tl-card, .featured-project, .project-card, .cert-card, .resume-card, .contact-card').forEach(function(card){
       var maxDeg = parseFloat(card.dataset.tiltMax || '3');
       card.addEventListener('mousemove', function(e){
+        // Don't fight interactive elements (tech tags, case-study buttons) with
+        // a continuously repositioning 3D transform — it can drift the target
+        // out from under the cursor before hover/click settles.
+        if (e.target.closest('.tech-interactive, .case-toggle')) return;
         var rect = card.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width;
         var py = (e.clientY - rect.top) / rect.height;
