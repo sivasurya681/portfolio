@@ -1386,29 +1386,123 @@
     .india-stage { left: 0; top: 120%; transform: none; margin-left: 0; }
   }
 
-  /* ===================== RESUME ===================== */
-  .resume-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:32px; max-width:640px; }
-  .resume-toggle{
-    display:flex; gap:12px; background:var(--surface-2); border:1px solid var(--line);
-    border-radius:var(--radius-md); padding:6px; margin-bottom:28px;
+  /* ===================== BADGES & STATUS INDICATORS ===================== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    background: rgba(var(--accent-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-rgb), 0.25);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
   }
-  .resume-toggle button{
-    flex:1; background:transparent; border:1px solid transparent; color:var(--text-muted); font-family:var(--sans);
-    font-weight:600; font-size:14px; padding:12px 18px; border-radius:var(--radius-sm); cursor:pointer;
-    display:flex; align-items:center; justify-content:center; gap:16px; transition:all var(--dur-fast) var(--ease-out);
+  .badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
   }
-  .resume-toggle button:hover:not(.active){ color:var(--text); background:rgba(255,255,255,0.03); }
-  .resume-toggle button.active{
-    background:var(--accent); color:#161006; border-color:var(--accent);
-    box-shadow:0 4px 16px -4px rgba(var(--accent-rgb),0.4);
-  }
-  .country-code{ font-family:var(--mono); font-size:13px; font-weight:600; letter-spacing:0.06em; min-width:24px; text-align:left; opacity:0.8; }
-  .country-name{ font-weight:600; font-size:14px; }
 
-  .resume-panel{ display:none; }
-  .resume-panel.active{ display:block; }
-  .resume-panel p{ color:var(--text-muted); font-size:15px; margin-bottom:22px; }
-  .resume-facts{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
+  /* ===================== RESUME ===================== */
+  .resume-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    max-width: 680px;
+    position: relative;
+    overflow: hidden;
+  }
+  .resume-doc-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .resume-doc-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    background: rgba(var(--accent-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-rgb), 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast);
+  }
+  .resume-card:hover .resume-doc-icon {
+    transform: scale(1.06);
+    border-color: rgba(var(--accent-rgb), 0.5);
+  }
+  .resume-doc-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .resume-doc-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .resume-doc-name {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    word-break: break-all;
+  }
+  .resume-doc-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .resume-doc-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .resume-doc-meta .doc-sep {
+    color: var(--line);
+    user-select: none;
+  }
+  .resume-doc-desc {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 560px) {
+    .resume-card { padding: 24px 20px; }
+    .resume-doc-row { gap: 14px; margin-bottom: 16px; padding-bottom: 16px; }
+    .resume-doc-icon { width: 44px; height: 44px; }
+    .resume-doc-icon svg { width: 22px; height: 22px; }
+    .resume-doc-name { font-size: 13.5px; }
+    .resume-doc-desc { font-size: 14px; margin-bottom: 22px; }
+  }
 
   /* ===================== CONTACT & FOOTER ===================== */
   .contact-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
@@ -1962,15 +2056,34 @@
       </div>
 
       <div class="resume-card tilt" data-tilt-max="2">
-        <p style="color:var(--text-muted); font-size:15px; margin-bottom:18px;">
-          Optimized for Dubai, Abu Dhabi &amp; UAE opportunities — emphasizing GenAI/LLM solutions, NLP pipelines, Python full-stack architectures, and production AI delivery.
-        </p>
-        <div class="resume-facts" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px;">
-          <span class="badge"><span class="dot"></span>Dubai, UAE</span>
-          <span class="badge">Visit Visa</span>
-          <span class="badge">Immediate Joiner</span>
-          <span class="badge">AI/ML &amp; Full Stack</span>
+        <div class="resume-doc-row">
+          <div class="resume-doc-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+          </div>
+          <div class="resume-doc-info">
+            <div class="resume-doc-header">
+              <span class="resume-doc-name">Siva-Surya-UAE-Resume.pdf</span>
+              <span class="resume-doc-badge">ATS-Friendly</span>
+            </div>
+            <div class="resume-doc-meta">
+              <span>2 Pages</span>
+              <span class="doc-sep" aria-hidden="true">•</span>
+              <span>172 KB</span>
+              <span class="doc-sep" aria-hidden="true">•</span>
+              <span>UAE Edition (October 2026)</span>
+            </div>
+          </div>
         </div>
+
+        <p class="resume-doc-desc">
+          Authoritative technical resume tailored for UAE enterprise AI initiatives and engineering teams. Details verified production delivery across SkandaxHIRE, SkandaxONBO, Multilingual AI Hub, and CareerBuddy AI — highlighting end-to-end GenAI orchestration, LLM fine-tuning/prompting, FastAPI microservices, and full-stack architectures.
+        </p>
         <div class="uae-flight-container">
           <span class="magnetic">
             <button type="button" id="btn-uae-download" class="btn btn-primary magnetic-inner uae-download-btn">
